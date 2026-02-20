@@ -1,21 +1,5 @@
 body {
   margin: 0;
   overflow: hidden;
-  background: #87ceeb;
-  font-family: Arial, sans-serif;
-}
-
-canvas {
-  display: block;
-}
-
-.ui {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  background: rgba(0,0,0,0.6);
-  color: white;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 14px;
+  background: skyblue;
 }
