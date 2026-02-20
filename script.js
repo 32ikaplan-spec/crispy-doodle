@@ -5,8 +5,8 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const TILE_SIZE = 40;
-const WORLD_WIDTH = 100;
-const WORLD_HEIGHT = 50;
+const WORLD_WIDTH = 50;
+const WORLD_HEIGHT = 30;
 
 let cameraX = 0;
 let cameraY = 0;
@@ -14,14 +14,13 @@ let selectedBlock = 1;
 
 const COLORS = {
   0: null,
-  1: "#228B22", // grass
-  2: "#8B4513", // dirt
-  3: "#777777"  // stone
+  1: "#22aa22",
+  2: "#8B4513",
+  3: "#888888"
 };
 
-// Generate world
+// Create world array
 let world = [];
-
 for (let y = 0; y < WORLD_HEIGHT; y++) {
   world[y] = [];
   for (let x = 0; x < WORLD_WIDTH; x++) {
@@ -29,11 +28,12 @@ for (let y = 0; y < WORLD_HEIGHT; y++) {
   }
 }
 
+// Generate terrain
 for (let x = 0; x < WORLD_WIDTH; x++) {
-  let groundHeight = 20 + Math.floor(Math.random() * 10);
-  for (let y = groundHeight; y < WORLD_HEIGHT; y++) {
-    if (y === groundHeight) world[y][x] = 1;
-    else if (y < groundHeight + 3) world[y][x] = 2;
+  let ground = 15 + Math.floor(Math.random() * 5);
+  for (let y = ground; y < WORLD_HEIGHT; y++) {
+    if (y === ground) world[y][x] = 1;
+    else if (y < ground + 3) world[y][x] = 2;
     else world[y][x] = 3;
   }
 }
@@ -61,7 +61,7 @@ function draw() {
 
 draw();
 
-// Controls
+// Keyboard movement
 window.addEventListener("keydown", (e) => {
   if (e.key === "1") selectedBlock = 1;
   if (e.key === "2") selectedBlock = 2;
@@ -89,12 +89,11 @@ canvas.addEventListener("mousedown", (e) => {
     gridY < WORLD_HEIGHT
   ) {
     if (e.button === 0) {
-      world[gridY][gridX] = 0; // break
+      world[gridY][gridX] = 0;
     } else if (e.button === 2) {
-      world[gridY][gridX] = selectedBlock; // place
+      world[gridY][gridX] = selectedBlock;
     }
   }
 });
 
-// Disable right click menu
 canvas.addEventListener("contextmenu", (e) => e.preventDefault());
